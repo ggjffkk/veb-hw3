@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Калькулятор прибутку СЕС</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-6">
+
+<div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-3xl">
+
+<h1 class="text-3xl font-bold text-center text-slate-700 mb-6">
+Калькулятор прибутку сонячної електростанції
+</h1>
+
+<p class="text-center text-slate-500 mb-8">
+Введіть параметри системи прогнозування
+</p>
+
+<form method="POST">
+
+<div class="grid md:grid-cols-2 gap-6">
+
+<div class="bg-slate-50 p-4 rounded-lg shadow-sm">
+<label>Середня потужність Pc (МВт)</label>
+<input name="pc" type="number" step="any" value="{{.Pc}}" class="mt-2 w-full border p-2">
+</div>
+
+<div class="bg-slate-50 p-4 rounded-lg shadow-sm">
+<label>Вартість електроенергії (грн)</label>
+<input name="price" type="number" step="any" value="{{.Price}}" class="mt-2 w-full border p-2">
+</div>
+
+<div class="bg-slate-50 p-4 rounded-lg shadow-sm">
+<label>σ₁</label>
+<input name="sigma1" type="number" step="any" value="{{.Sigma1}}" class="mt-2 w-full border p-2">
+</div>
+
+<div class="bg-slate-50 p-4 rounded-lg shadow-sm">
+<label>σ₂</label>
+<input name="sigma2" type="number" step="any" value="{{.Sigma2}}" class="mt-2 w-full border p-2">
+</div>
+
+</div>
+
+<button class="mt-8 w-full bg-blue-600 text-white py-3 rounded">
+Розрахувати
+</button>
+
+</form>
+
+{{if .Show}}
+<div class="mt-8 bg-blue-50 p-6 rounded">
+
+<p><b>Діапазон:</b> {{printf "%.2f" .A}} - {{printf "%.2f" .B}} МВт</p>
+
+<p>W = {{printf "%.2f" .EnergyTotal}} МВт·год</p>
+
+<hr class="my-4">
+
+<p>До покращення:</p>
+<p>P₁ = {{printf "%.2f" .P1}}</p>
+<p>S₁ = {{printf "%.2f" .S1}}</p>
+
+<hr class="my-4">
+
+<p>Після покращення:</p>
+<p>P₂ = {{printf "%.2f" .P2}}</p>
+<p>S₂ = {{printf "%.2f" .S2}}</p>
+
+<hr class="my-4">
+
+<p class="text-green-700 font-bold text-lg">
+Прибуток: {{printf "%.2f" .Profit}} тис. грн
+</p>
+
+</div>
+{{end}}
+
+</div>
+
+</body>
+</html>
